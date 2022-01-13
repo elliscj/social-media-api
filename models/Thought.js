@@ -1,5 +1,35 @@
 const { Schema, model, Mongoose } = require("mongoose");
 
+const reactionSchema = new Schema(
+  {
+    reactionId: {
+      type: Schema.Types.ObjectId,
+      //   default: new ObjectId
+      default: () => new Types.ObjectId(),
+    },
+    reactionBody: {
+      type: String,
+      required: true,
+      maxlength: 280,
+    },
+    username: {
+      //type string required true??
+      type: Schema.Types.username,
+      ref: "User",
+    },
+    createdAt: {
+      type: Date,
+      default: Date.now,
+      // getter to format on query
+    },
+  },
+  {
+    toJSON: {
+      getters: true,
+    },
+  }
+);
+
 const thoughtSchema = new Schema(
   {
     thoghtText: {
@@ -13,14 +43,17 @@ const thoughtSchema = new Schema(
       // getter to format on query
     },
     username: {
-      type: Schema.Types.username,
-      ref: "User",
+      type: String,
+      required: true,
+      //   type: Schema.Types.username,
+      //   ref: "User",
     },
     reactions: [reactionSchema],
   },
   {
     toJSON: {
       virtuals: true,
+      getters: true,
     },
     id: false,
   }
