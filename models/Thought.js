@@ -1,34 +1,5 @@
 const { Schema, model, Mongoose } = require("mongoose");
-
-const reactionSchema = new Schema(
-  {
-    reactionId: {
-      type: Schema.Types.ObjectId,
-      //   default: new ObjectId
-      default: () => new Types.ObjectId(),
-    },
-    reactionBody: {
-      type: String,
-      required: true,
-      maxlength: 280,
-    },
-    username: {
-      //type string required true??
-      type: Schema.Types.username,
-      ref: "User",
-    },
-    createdAt: {
-      type: Date,
-      default: Date.now,
-      // getter to format on query
-    },
-  },
-  {
-    toJSON: {
-      getters: true,
-    },
-  }
-);
+const reactionSchema = require("./Reaction");
 
 const thoughtSchema = new Schema(
   {
@@ -59,7 +30,7 @@ const thoughtSchema = new Schema(
   }
 );
 
-thoughtSchema.virtual(reactionCount).get(function () {
+thoughtSchema.virtual("reactionCount").get(function () {
   return this.reactions.length;
 });
 
