@@ -11,13 +11,10 @@ const thoughtSchema = new Schema(
     createdAt: {
       type: Date,
       default: Date.now,
-      // getter to format on query
     },
     username: {
       type: String,
       required: true,
-      //   type: Schema.Types.username,
-      //   ref: "User",
     },
     reactions: [reactionSchema],
   },

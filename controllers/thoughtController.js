@@ -42,12 +42,10 @@ module.exports = {
   },
   deleteThought(req, res) {
     Thought.findByIdAndDelete({ _id: req.params.thoughtId })
-      .then(
-        (thought) =>
-          !thought
-            ? res.status(404).json({ message: "No thought with that ID." })
-            : res.json(thought)
-        // delete assosiated reactions - Reaction.deleteMany({ _id: { $in: thought.user}}) ???
+      .then((thought) =>
+        !thought
+          ? res.status(404).json({ message: "No thought with that ID." })
+          : res.json(thought)
       )
       .catch((err) => {
         res.status(500).json(err);
